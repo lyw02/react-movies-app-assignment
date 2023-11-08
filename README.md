@@ -9,7 +9,7 @@ Name: Yiwei Liu
 ### Features.
 [ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
  
-+ Feature 1
++ In movie details page, a list of top billed cast id displayed, with actors' avatar, name, and character name.
 + Feature 2
 + Feature 3
 + etc
