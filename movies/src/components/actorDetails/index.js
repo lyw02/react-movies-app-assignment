@@ -6,8 +6,10 @@ import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link";
 import { excerpt } from "../../util";
 import InfoEntry from "../infoEntry";
+import { Link as RouterLink } from "react-router-dom";
 
 const posterPathRoot = "https://image.tmdb.org/t/p/w780";
 
@@ -140,34 +142,50 @@ const ActorDetails = ({ actor, cast }) => {
           flexDirection="column"
           sx={{ ...boxStyle }}
         >
-          {cast.cast.map((c) => {
-            return (
-              <Stack
-                direction="row"
-                spacing={2}
-                alignItems="center"
-                sx={{ ...stackStyle }}
-              >
-                <Avatar
-                  alt={c.original_title}
-                  src={`${posterPathRoot}${c.poster_path}`}
-                  variant="square"
-                  sx={{ width: 200, height: 300 }}
-                />
-                <Typography variant="body2">
-                  <b>
-                    {c.original_title} ({c.release_date.substring(0, 4)})
-                  </b>
-                </Typography>
-                <Typography variant="body2">
-                  <i>as</i>
-                </Typography>
-                <Typography variant="body2">
-                  <b>{c.character}</b>
-                </Typography>
-              </Stack>
-            );
-          })}
+          {cast.cast ? (
+            cast.cast.map((c) => {
+              return (
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                  sx={{ ...stackStyle }}
+                >
+                  <Link
+                    component={RouterLink}
+                    to={`/movies/${c.id}`}
+                    underline="none"
+                  >
+                    <Avatar
+                      alt={c.original_title}
+                      src={`${posterPathRoot}${c.poster_path}`}
+                      variant="square"
+                      sx={{ width: 200, height: 300 }}
+                    />
+                  </Link>
+                  <Typography variant="body2">
+                    <b>
+                      <Link
+                        component={RouterLink}
+                        to={`/movies/${c.id}`}
+                        underline="none"
+                      >
+                        {c.original_title} ({c.release_date.substring(0, 4)})
+                      </Link>
+                    </b>
+                  </Typography>
+                  <Typography variant="body2">
+                    <i>as</i>
+                  </Typography>
+                  <Typography variant="body2">
+                    <b>{c.character}</b>
+                  </Typography>
+                </Stack>
+              );
+            })
+          ) : (
+            <Typography variant="body2">No Data</Typography>
+          )}
         </Box>
       </Paper>
     </>

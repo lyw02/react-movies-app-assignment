@@ -11,7 +11,9 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link";
 import MovieReviews from "../movieReviews";
+import { Link as RouterLink } from "react-router-dom";
 
 const profilePathRoot = "https://image.tmdb.org/t/p/w300";
 
@@ -27,8 +29,8 @@ const boxStyle = {
 const chipStyle = { margin: "3px" };
 
 const stackStyle = {
-  margin: "10px"
-}
+  margin: "10px",
+};
 
 const MovieDetails = ({ movie, actors }) => {
   // Don't miss this!
@@ -110,10 +112,33 @@ const MovieDetails = ({ movie, actors }) => {
             .filter((c) => c.known_for_department === "Acting")
             .map((c) => {
               return (
-                <Stack direction="row" spacing={2} alignItems="center" sx={{ ...stackStyle }}>
-                  <Avatar alt={c.name} src={`${profilePathRoot}${c.profile_path}`} />
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                  sx={{ ...stackStyle }}
+                >
+                  <Link
+                    component={RouterLink}
+                    to={`/actors/${c.id}`}
+                    underline="none"
+                  >
+                    <Avatar
+                      alt={c.name}
+                      src={`${profilePathRoot}${c.profile_path}`}
+                    />
+                  </Link>
+
                   <Typography variant="body2">
-                    <b>{c.name}</b>
+                    <b>
+                      <Link
+                        component={RouterLink}
+                        to={`/actors/${c.id}`}
+                        underline="none"
+                      >
+                        {c.name}
+                      </Link>
+                    </b>
                   </Typography>
                   <Typography variant="body2">
                     <i>as</i>

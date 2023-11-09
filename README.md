@@ -11,7 +11,9 @@ Name: Yiwei Liu
 
 + Add actor details pages, listing actor's biography, information, images, and acted movies. 
 + + The biography can be expanded or folded by clicking an button.
++ + Users can jump to movie details page by clicking a movie's poster or name in the acted movied list.
 + In movie details pages, display a list of top billed cast actors, with actors' avatar, name, and character name.
++ + Users can jump to actor details page by clicking an actor's avatar or name in the top billed cast list.
 + Feature 2
 + Feature 3
 + etc
@@ -25,7 +27,6 @@ Name: Yiwei Liu
 
 [ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
 
-e.g.
 + Person (actor) details - person/:id
 + Movies that a person (actor) acted - person/:id/movie_credits
 + Person (actor) images - person/:id/images
