@@ -8,8 +8,10 @@ Name: Yiwei Liu
 
 ### Features.
 [ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
- 
-+ In movie details page, a list of top billed cast id displayed, with actors' avatar, name, and character name.
+
++ Add actor details pages, listing actor's biography, information, images, and acted movies. 
++ + The biography can be expanded or folded by clicking an button.
++ In movie details pages, display a list of top billed cast actors, with actors' avatar, name, and character name.
 + Feature 2
 + Feature 3
 + etc
@@ -24,18 +26,22 @@ Name: Yiwei Liu
 [ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
 
 e.g.
-+ Discover list of movies - discover/movie
++ Person (actor) details - person/:id
++ Movies that a person (actor) acted - person/:id/movie_credits
++ Person (actor) images - person/:id/images
+<!-- + Discover list of movies - discover/movie
 + Movie details - movie/:id
-+ Movie genres = /genre/movie/list
++ Movie genres = /genre/movie/list -->
 
 ## Routing.
 
 [ List the __new routes__ supported by your app and state the associated page.]
 
-+ /blogs - displays all published blogs.
++ /actors/:id - displays an actor's details
+<!-- + /blogs - displays all published blogs.
 + /blogs/:id - displays a particular blog.
 + /blogs/:id/comments - detail view of a particular blog and its comments.
-+ etc.
++ etc. -->
 
 [If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
 

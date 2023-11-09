@@ -76,7 +76,7 @@ const MovieDetails = ({ movie, actors }) => {
           />
           <Chip
             icon={<StarRate />}
-            label={`${movie.vote_average} (${movie.vote_count}`}
+            label={`${movie.vote_average} (${movie.vote_count})`}
             sx={{ ...chipStyle }}
           />
           <Chip
