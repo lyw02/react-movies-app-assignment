@@ -35,7 +35,6 @@ const expandButtonStyle = {
 
 const ActorDetails = ({ actor, cast }) => {
   // Don't miss this!
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [isFullBiography, setIsFullBiography] = useState(false);
 
   return (
@@ -107,6 +106,8 @@ const ActorDetails = ({ actor, cast }) => {
                       return "Male";
                     case 3:
                       return "None binary";
+                    default:
+                      return "Unknown";
                   }
                 }}
               />

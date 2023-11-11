@@ -3,10 +3,13 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+import MovieEntryList from "../movieEntryList";
+import ToolBar from "../toolBar";
 
 function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [viewType, setViewType] = useState("Card");
   const genreId = Number(genreFilter);
 
   let displayedMovies = movies
@@ -23,9 +26,12 @@ function MovieListPageTemplate({ movies, title, action }) {
   };
 
   return (
-    <Grid container sx={{ padding: '20px' }}>
+    <Grid container sx={{ padding: "20px" }}>
       <Grid item xs={12}>
         <Header title={title} />
+      </Grid>
+      <Grid item xs={12}>
+        <ToolBar viewType={viewType} setViewType={setViewType} />
       </Grid>
       <Grid item container spacing={5}>
         <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -35,7 +41,13 @@ function MovieListPageTemplate({ movies, title, action }) {
             genreFilter={genreFilter}
           />
         </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
+        {viewType === "Card" ? (
+          <MovieList action={action} movies={displayedMovies} />
+        ) : (
+          <Grid key="listContainer" item xs={12} sm={6} md={8} lg={9} xl={10}>
+            <MovieEntryList action={action} movies={displayedMovies} />
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );
