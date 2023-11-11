@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
-import { getMovie, getMovieCredits } from '../api/tmdb-api'
+import { getMovie, getMovieCredits, getSimilarMovies } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 // import useMovie from "../hooks/useMovie";
@@ -20,7 +20,12 @@ const MoviePage = (props) => {
     getMovieCredits
   );
 
-  if (isMovieLoading || isActorsLoading) {
+  const { data: similarMovies, error: similarMoviesError, isLoading: isSimilarMoviesLoading, isError: isSimilarMoviesError } = useQuery(
+    ["similarMovies", { id: id }],
+    getSimilarMovies
+  );
+
+  if (isMovieLoading || isActorsLoading || isSimilarMoviesLoading) {
     return <Spinner />;
   }
 
@@ -32,12 +37,16 @@ const MoviePage = (props) => {
     return <h1>{actorsError.message}</h1>
   }
 
+  if (isSimilarMoviesError) {
+    return <h1>{similarMoviesError.message}</h1>
+  }
+
   return (
     <>
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} actors={actors} />
+            <MovieDetails movie={movie} actors={actors} similarMovies={similarMovies} />
           </PageTemplate>
         </>
       ) : (

@@ -14,6 +14,7 @@ import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import MovieReviews from "../movieReviews";
 import { Link as RouterLink } from "react-router-dom";
+import MovieEntryList from "../movieEntryList";
 
 const profilePathRoot = "https://image.tmdb.org/t/p/w300";
 
@@ -32,9 +33,27 @@ const stackStyle = {
   margin: "10px",
 };
 
-const MovieDetails = ({ movie, actors }) => {
+const MovieDetails = ({ movie, actors, similarMovies }) => {
   // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [topBilledOrSimilar, setTopBilledOrSimilar] = useState({
+    topBilled: { color: "black", clickable: false },
+    similar: { color: "gray", clickable: true },
+  });
+
+  const handleClick = (elemName) => {
+    setTopBilledOrSimilar((prevState) => {
+      let newState = { ...prevState };
+      if (newState[elemName].color === "gray") {
+        newState[elemName].color = "black";
+        newState[elemName].clickable = false;
+        let otherElemName = elemName === "topBilled" ? "similar" : "topBilled";
+        newState[otherElemName].color = "gray";
+        newState[otherElemName].clickable = true;
+      }
+      return newState;
+    });
+  };
 
   return (
     <>
@@ -42,7 +61,7 @@ const MovieDetails = ({ movie, actors }) => {
         <i>Overview</i>
       </Typography>
 
-      <Paper className="overview">
+      <Paper>
         <Box sx={{ ...boxStyle }}>
           <Typography variant="h6" component="p">
             {movie.overview}
@@ -54,8 +73,8 @@ const MovieDetails = ({ movie, actors }) => {
         <i>Basic Info</i>
       </Typography>
 
-      <Paper className="basic-info">
-        <Box className="genres-box" component="ul" sx={{ ...boxStyle }}>
+      <Paper>
+        <Box component="ul" sx={{ ...boxStyle }}>
           <li>
             <Chip label="Genres" sx={{ ...chipStyle }} color="primary" />
           </li>
@@ -65,7 +84,7 @@ const MovieDetails = ({ movie, actors }) => {
             </li>
           ))}
         </Box>
-        <Box className="info-box" component="ul" sx={{ ...boxStyle }}>
+        <Box component="ul" sx={{ ...boxStyle }}>
           <Chip
             icon={<AccessTimeIcon />}
             label={`${movie.runtime} min.`}
@@ -86,7 +105,7 @@ const MovieDetails = ({ movie, actors }) => {
             sx={{ ...chipStyle }}
           />
         </Box>
-        <Box className="prod-countries-box" component="ul" sx={{ ...boxStyle }}>
+        <Box component="ul" sx={{ ...boxStyle }}>
           <li>
             <Chip
               label="Production countries"
@@ -102,53 +121,83 @@ const MovieDetails = ({ movie, actors }) => {
         </Box>
       </Paper>
 
-      <Typography variant="h5" component="h3">
-        <i>Top Billed Cast</i>
-      </Typography>
+      <Stack direction="row" spacing={2}>
+        <Typography
+          variant="h5"
+          component="h3"
+          color={topBilledOrSimilar.topBilled.color}
+          onClick={
+            topBilledOrSimilar.topBilled.clickable
+              ? () => handleClick("topBilled")
+              : null
+          }
+          sx={{ cursor: "pointer" }}
+        >
+          <i>Top Billed Cast</i>
+        </Typography>
+        <Typography variant="h5" component="h3" sx={{ color: "gray" }}>
+          <i>/</i>
+        </Typography>
+        <Typography
+          variant="h5"
+          component="h3"
+          color={topBilledOrSimilar.similar.color}
+          onClick={
+            topBilledOrSimilar.similar.clickable
+              ? () => handleClick("similar")
+              : null
+          }
+          sx={{ cursor: "pointer" }}
+        >
+          <i>Similar Movies</i>
+        </Typography>
+      </Stack>
 
       <Paper>
-        <Box className="actor-box" flexDirection="column" sx={{ ...boxStyle }}>
-          {actors.cast
-            .filter((c) => c.known_for_department === "Acting")
-            .map((c) => {
-              return (
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  alignItems="center"
-                  sx={{ ...stackStyle }}
-                >
-                  <Link
-                    component={RouterLink}
-                    to={`/actors/${c.id}`}
-                    underline="none"
-                  >
-                    <Avatar
-                      alt={c.name}
-                      src={`${profilePathRoot}${c.profile_path}`}
-                    />
-                  </Link>
-
-                  <Typography variant="body2">
-                    <b>
+        <Box flexDirection="column" sx={{ ...boxStyle }}>
+          {!topBilledOrSimilar.topBilled.clickable
+            ? actors.cast
+                .filter((c) => c.known_for_department === "Acting")
+                .map((c) => {
+                  return (
+                    <Stack
+                      direction="row"
+                      spacing={2}
+                      alignItems="center"
+                      sx={{ ...stackStyle }}
+                    >
                       <Link
                         component={RouterLink}
                         to={`/actors/${c.id}`}
                         underline="none"
                       >
-                        {c.name}
+                        <Avatar
+                          alt={c.name}
+                          src={`${profilePathRoot}${c.profile_path}`}
+                        />
                       </Link>
-                    </b>
-                  </Typography>
-                  <Typography variant="body2">
-                    <i>as</i>
-                  </Typography>
-                  <Typography variant="body2">
-                    <b>{c.character}</b>
-                  </Typography>
-                </Stack>
-              );
-            })}
+
+                      <Typography variant="body2">
+                        <b>
+                          <Link
+                            component={RouterLink}
+                            to={`/actors/${c.id}`}
+                            underline="none"
+                          >
+                            {c.name}
+                          </Link>
+                        </b>
+                      </Typography>
+                      <Typography variant="body2">
+                        <i>as</i>
+                      </Typography>
+                      <Typography variant="body2">
+                        <b>{c.character}</b>
+                      </Typography>
+                    </Stack>
+                  );
+                })
+            : <MovieEntryList movies={similarMovies.results} action={null} />}
         </Box>
       </Paper>
 

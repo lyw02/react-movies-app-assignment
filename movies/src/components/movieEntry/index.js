@@ -84,7 +84,7 @@ function MovieEntry({ movie, action }) {
             </Typography>
 
             <Link to={`/movies/${movie.id}`}>
-              {action(movie)}
+              {action && action(movie)}
               <Button variant="outlined" size="medium" color="primary">
                 More Info ...
               </Button>
