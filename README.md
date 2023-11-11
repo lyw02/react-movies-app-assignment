@@ -14,7 +14,7 @@ Name: Yiwei Liu
 + + Users can jump to movie details page by clicking a movie's poster or name in the acted movied list.
 + In movie details pages, display a list of top billed cast actors, with actors' avatar, name, and character name.
 + + Users can jump to actor details page by clicking an actor's avatar or name in the top billed cast list.
-+ Feature 2
++ Users can switch view between movie cards and movie entries list by using toggle buttons.
 + Feature 3
 + etc
 + etc
