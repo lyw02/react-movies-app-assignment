@@ -1,8 +1,8 @@
 const apiKey = process.env.REACT_APP_TMDB_KEY;
 
-export const getMovies = () => {
+export const getMovies = (page=1) => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&include_adult=false&include_video=false&page=${page}`
   )
     .then((response) => {
       if (!response.ok) {
@@ -73,9 +73,9 @@ export const getMovieReviews = (id) => {
     });
 };
 
-export const getUpcomingMovies = () => {
+export const getUpcomingMovies = (page=1) => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}`
   )
     .then((response) => {
       if (!response.ok) {
@@ -173,11 +173,11 @@ export const getSimilarMovies = (args) => {
     });
 };
 
-export const getTrendingMovies = (args) => {
+export const getTrendingMovies = (args, page) => {
   const [, timeWindowPart] = args.queryKey;
   const { timeWindow } = timeWindowPart;
   return fetch(
-    `https://api.themoviedb.org/3/trending/movie/${timeWindow}?api_key=${apiKey}&language=en-U`
+    `https://api.themoviedb.org/3/trending/movie/${timeWindow}?api_key=${apiKey}&language=en-U&page=${page}`
   )
     .then((response) => {
       if (!response.ok) {

@@ -5,12 +5,24 @@ import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 import MovieEntryList from "../movieEntryList";
 import ToolBar from "../toolBar";
+import Pagination from "@mui/material/Pagination";
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({
+  movies,
+  page,
+  totalPage,
+  getPage,
+  title,
+  action,
+}) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [viewType, setViewType] = useState("Card");
   const genreId = Number(genreFilter);
+
+  const handlePageChange = (event, value) => {
+    getPage(value);
+  };
 
   let displayedMovies = movies
     .filter((m) => {
@@ -48,6 +60,14 @@ function MovieListPageTemplate({ movies, title, action }) {
             <MovieEntryList action={action} movies={displayedMovies} />
           </Grid>
         )}
+      </Grid>
+      <Grid container xs={12} sx={{ margin: "20px", justifyContent: "center" }}>
+        <Pagination
+          color="secondary"
+          count={totalPage}
+          page={page}
+          onChange={handlePageChange}
+        />
       </Grid>
     </Grid>
   );

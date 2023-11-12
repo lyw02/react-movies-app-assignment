@@ -18,12 +18,14 @@ Name: Yiwei Liu
 + + This page displays other movies that similar to that movie.
 + + Users can switch between top billed cast and similar movies by clicking subtitles.
 + + Users can jump to actor details page by clicking an actor's avatar or name in the top billed cast list.
-+ Modify movies display view (in home page, favorate movies page, upcoming movies page, etc.):
++ Modify movies display view (in home page, favorate movies page, upcoming movies page, and trending movies page):
 + + Users can switch view between movie cards and movie entries list by using toggle buttons.
 + Add trending movies pages:
 + + The movie lists daily or weekly trending movies.
 + + Users can choose different time window (day or week) at the site header by a popup menu.
-+ etc
++ Add pagation feature (in home page, upcoming movies page and trending movies page):
++ + Users can switch among different pages by Material UI Pagination component.
++ + When users change page number by clicking the pagination component, an API request will be sent with the query param \`?page=${page}\`, and the response will be added to react-query cache.
 + etc
 
 ## Setup requirements.
