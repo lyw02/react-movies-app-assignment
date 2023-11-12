@@ -172,3 +172,20 @@ export const getSimilarMovies = (args) => {
       throw error;
     });
 };
+
+export const getTrendingMovies = (args) => {
+  const [, timeWindowPart] = args.queryKey;
+  const { timeWindow } = timeWindowPart;
+  return fetch(
+    `https://api.themoviedb.org/3/trending/movie/${timeWindow}?api_key=${apiKey}&language=en-U`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

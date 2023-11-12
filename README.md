@@ -20,7 +20,9 @@ Name: Yiwei Liu
 + + Users can jump to actor details page by clicking an actor's avatar or name in the top billed cast list.
 + Modify movies display view (in home page, favorate movies page, upcoming movies page, etc.):
 + + Users can switch view between movie cards and movie entries list by using toggle buttons.
-+ Feature 3
++ Add trending movies pages:
++ + The movie lists daily or weekly trending movies.
++ + Users can choose different time window (day or week) at the site header by a popup menu.
 + etc
 + etc
 
@@ -36,6 +38,7 @@ Name: Yiwei Liu
 + Movies that a person (actor) acted - person/:id/movie_credits
 + Person (actor) images - person/:id/images
 + Similar movies - movie/:id/similar
++ Trending movies (day or week) - trending/movie/:time_window
 <!-- + Discover list of movies - discover/movie
 + Movie details - movie/:id
 + Movie genres = /genre/movie/list -->
@@ -45,6 +48,7 @@ Name: Yiwei Liu
 [ List the __new routes__ supported by your app and state the associated page.]
 
 + /actors/:id - displays an actor's details
++ /movies/trending/:timeWindow - displays daily or weekly trending movies
 <!-- + /blogs - displays all published blogs.
 + /blogs/:id - displays a particular blog.
 + /blogs/:id/comments - detail view of a particular blog and its comments.
