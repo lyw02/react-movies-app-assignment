@@ -8,6 +8,7 @@ import ToolBar from "../toolBar";
 import Pagination from "@mui/material/Pagination";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
+import _ from "lodash";
 
 function MovieListPageTemplate({
   movies,
@@ -24,13 +25,14 @@ function MovieListPageTemplate({
   const [ratingStartFilter, setRatingStartFilter] = useState(0);
   const [ratingEndFilter, setRatingEndFilter] = useState(10);
   const [viewType, setViewType] = useState("Card");
+  const [sortBy, setSortBy] = useState("");
   const genreId = Number(genreFilter);
 
   const handlePageChange = (event, value) => {
     getPage(value);
   };
 
-  let displayedMovies = movies
+  let filteredMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
@@ -44,7 +46,7 @@ function MovieListPageTemplate({
     });
 
   if (releaseDateStartFilter && releaseDateEndFilter) {
-    displayedMovies = displayedMovies.filter((m) => {
+    filteredMovies = filteredMovies.filter((m) => {
       return dayjs(m.release_date).isBetween(
         dayjs(releaseDateStartFilter),
         dayjs(releaseDateEndFilter),
@@ -53,7 +55,7 @@ function MovieListPageTemplate({
       );
     });
   } else if (releaseDateStartFilter) {
-    displayedMovies = displayedMovies.filter((m) => {
+    filteredMovies = filteredMovies.filter((m) => {
       return dayjs(m.release_date).isBetween(
         dayjs(releaseDateStartFilter),
         dayjs(),
@@ -62,7 +64,7 @@ function MovieListPageTemplate({
       );
     });
   } else if (releaseDateEndFilter) {
-    displayedMovies = displayedMovies.filter((m) => {
+    filteredMovies = filteredMovies.filter((m) => {
       return dayjs(m.release_date).isBetween(
         dayjs("1900-01-01"),
         dayjs(releaseDateEndFilter),
@@ -71,6 +73,21 @@ function MovieListPageTemplate({
       );
     });
   }
+
+  let filteredMoviesSorted;
+  if (sortBy === "title") {
+    filteredMoviesSorted = _.orderBy(filteredMovies, "title", "asc");
+  } else if (sortBy === "releaseDate") {
+    filteredMoviesSorted = _.orderBy(filteredMovies, "release_date", "dsc");
+  } else if (sortBy === "rating") {
+    filteredMoviesSorted = _.orderBy(filteredMovies, "vote_average", "dsc");
+  } else if (sortBy === "default") {
+  }
+
+  let displayedMovies;
+  filteredMoviesSorted
+    ? (displayedMovies = filteredMoviesSorted)
+    : (displayedMovies = filteredMovies);
 
   const handleChange = (type, value) => {
     if (type === "name") {
@@ -83,7 +100,6 @@ function MovieListPageTemplate({
       setRatingEndFilter(value);
     } else if (type === "releaseDateStart") {
       setReleaseDateStartFilter(dayjs(value));
-      console.log(releaseDateStartFilter);
     } else if (type === "releaseDateEnd") {
       setReleaseDateEndFilter(dayjs(value));
     }
@@ -95,7 +111,12 @@ function MovieListPageTemplate({
         <Header title={title} />
       </Grid>
       <Grid item xs={12}>
-        <ToolBar viewType={viewType} setViewType={setViewType} />
+        <ToolBar
+          viewType={viewType}
+          setViewType={setViewType}
+          userSortBy={sortBy}
+          setSortBy={setSortBy}
+        />
       </Grid>
       <Grid item container spacing={5}>
         <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>

@@ -14,16 +14,16 @@ Name: Yiwei Liu
 + + The biography can be expanded or folded by clicking a button.
 + + Users can jump to movie details page by clicking a movie's poster or name in the acted movied list.
 + Modify movie details pages:
-+ + This page displays a list of top billed cast actors, with actors' avatar, name, and character name
-+ + This page displays other movies that similar to that movie.
++ + The page displays a list of top billed cast actors, with actors' avatar, name, and character name
++ + The page displays other movies that similar to that movie.
 + + Users can switch between top billed cast and similar movies by clicking subtitles.
 + + Users can jump to actor details page by clicking an actor's avatar or name in the top billed cast list.
-+ Modify movies display view (in home page, favorate movies page, upcoming movies page, and trending movies page):
++ Modify movies display view:
 + + Users can switch view between movie cards and movie entries list by using toggle buttons.
 + Add trending movies pages:
-+ + The movie lists daily or weekly trending movies.
++ + The page lists daily or weekly trending movies.
 + + Users can choose different time window (day or week) at the site header by a popup menu.
-+ Add pagation feature (in home page, upcoming movies page and trending movies page):
++ Add pagation feature:
 + + Users can switch among different pages by Material UI Pagination component.
 + + When users change page number by clicking the pagination component, an API request will be sent with the query param \`?page=${page}\`, and the response will be added to react-query cache.
 + Add Firebase authentication feature:
@@ -34,19 +34,24 @@ Name: Yiwei Liu
 + Add new filtering option: rating and release date:
 + + Users can set rating range to filter movies.
 + + Users can set release date range, by a date picker, to to filter movies.
++ Add sort feature:
++ + Users can sort movie lists by title, release date, or rating.
 
 ## Setup requirements.
 
 [ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
 
-Install firebase:
+Install Firebase:
 `$ npm install firebase`
 
-Install day.js:
+Install Day.js:
 `$ npm install dayjs`
 
 Install MUI X Date Picker:
 `$ npm install @mui/x-date-pickers`
+
+Install Lodash:
+`$ npm install lodash`
 
 ## API endpoints.
 
@@ -107,3 +112,10 @@ i.e. aspects not covered in the lectures/labs. Include the source code filenames
 + + + src/components/filterMoviesCard/index.js
 + + References:
 + + + Doc: https://mui.com/x/react-date-pickers/date-picker/
+
++ __Lodash__ is a JavaScript utility library that provides various functions. In this app, I use Lodash to implement sorting feature.
++ + Source code filenames:
++ + + src/components/toolBar/index.js
++ + + src/components/templateMovieListPage/index.js
++ + References:
++ + + Doc: https://lodash.com/docs/4.17.15
