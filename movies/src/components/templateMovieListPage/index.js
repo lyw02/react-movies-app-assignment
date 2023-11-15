@@ -17,6 +17,9 @@ function MovieListPageTemplate({
 }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [releaseDateFilter, setReleaseDateFilter] = useState();
+  const [ratingStartFilter, setRatingStartFilter] = useState(0);
+  const [ratingEndFilter, setRatingEndFilter] = useState(10);
   const [viewType, setViewType] = useState("Card");
   const genreId = Number(genreFilter);
 
@@ -30,11 +33,26 @@ function MovieListPageTemplate({
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+    })
+    .filter((m) => {
+      return (
+        m.vote_average >= ratingStartFilter && m.vote_average <= ratingEndFilter
+      );
     });
+  // .filter((m) => {
+  //   return m.release_date.
+  // });
 
   const handleChange = (type, value) => {
-    if (type === "name") setNameFilter(value);
-    else setGenreFilter(value);
+    if (type === "name") {
+      setNameFilter(value);
+    } else if (type === "genre") {
+      setGenreFilter(value);
+    } else if (type === "ratingStart") {
+      setRatingStartFilter(value);
+    } else if (type === "ratingEnd") {
+      setRatingEndFilter(value);
+    }
   };
 
   return (
@@ -51,6 +69,8 @@ function MovieListPageTemplate({
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
+            ratingStartFilter={ratingStartFilter}
+            ratingEndFilter={ratingEndFilter}
           />
         </Grid>
         {viewType === "Card" ? (
