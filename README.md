@@ -103,3 +103,7 @@ i.e. aspects not covered in the lectures/labs. Include the source code filenames
 + + + Doc: https://day.js.org/docs/en/installation/installation
 
 + __MUI X__ is an extension library of Material UI. In this app, I use __MUI X Date Picker__, a component for picking date, to implement new filtering option that based on movies' release date, together with Day.js.
++ + Source code filenames:
++ + + src/components/filterMoviesCard/index.js
++ + References:
++ + + Doc: https://mui.com/x/react-date-pickers/date-picker/
