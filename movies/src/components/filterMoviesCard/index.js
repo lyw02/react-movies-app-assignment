@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -14,6 +14,11 @@ import img from "../../images/pexels-dziana-hasanbekava-5480827.jpg";
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
+import dayjs from "dayjs";
+import "dayjs/locale/en-gb";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const formControl = {
   margin: 1,
@@ -44,7 +49,7 @@ export default function FilterMoviesCard(props) {
   }
 
   const handleChange = (e, type, value) => {
-    e.preventDefault();
+    e && e.preventDefault();
     props.onUserInput(type, value); // NEW
   };
 
@@ -62,6 +67,14 @@ export default function FilterMoviesCard(props) {
 
   const handleRatingEndChange = (e) => {
     handleChange(e, "ratingEnd", e.target.value);
+  };
+
+  const handleReleaseDateStartChange = (date) => {
+    handleChange(null, "releaseDateStart", date);
+  };
+
+  const handleReleaseDateEndChange = (date) => {
+    handleChange(null, "releaseDateEnd", date);
   };
 
   return (
@@ -123,6 +136,25 @@ export default function FilterMoviesCard(props) {
             value={props.ratingEndFilter}
             onChange={handleRatingEndChange}
           />
+        </Stack>
+        <Stack>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale="en-gb"
+          >
+            <DatePicker
+              label="Release time from"
+              value={props.releaseDateStartFilter}
+              onChange={handleReleaseDateStartChange}
+              sx={{ ...formControl, minWidth: 100 }}
+            />
+            <DatePicker
+              label="to"
+              value={props.releaseDateEndFilter}
+              onChange={handleReleaseDateEndChange}
+              sx={{ ...formControl, minWidth: 100 }}
+            />
+          </LocalizationProvider>
         </Stack>
       </CardContent>
       <CardMedia sx={{ height: 300 }} image={img} title="Filter" />

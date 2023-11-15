@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid";
 import MovieEntryList from "../movieEntryList";
 import ToolBar from "../toolBar";
 import Pagination from "@mui/material/Pagination";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 
 function MovieListPageTemplate({
   movies,
@@ -17,7 +19,8 @@ function MovieListPageTemplate({
 }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
-  const [releaseDateFilter, setReleaseDateFilter] = useState();
+  const [releaseDateStartFilter, setReleaseDateStartFilter] = useState();
+  const [releaseDateEndFilter, setReleaseDateEndFilter] = useState();
   const [ratingStartFilter, setRatingStartFilter] = useState(0);
   const [ratingEndFilter, setRatingEndFilter] = useState(10);
   const [viewType, setViewType] = useState("Card");
@@ -39,9 +42,35 @@ function MovieListPageTemplate({
         m.vote_average >= ratingStartFilter && m.vote_average <= ratingEndFilter
       );
     });
-  // .filter((m) => {
-  //   return m.release_date.
-  // });
+
+  if (releaseDateStartFilter && releaseDateEndFilter) {
+    displayedMovies = displayedMovies.filter((m) => {
+      return dayjs(m.release_date).isBetween(
+        dayjs(releaseDateStartFilter),
+        dayjs(releaseDateEndFilter),
+        "day",
+        []
+      );
+    });
+  } else if (releaseDateStartFilter) {
+    displayedMovies = displayedMovies.filter((m) => {
+      return dayjs(m.release_date).isBetween(
+        dayjs(releaseDateStartFilter),
+        dayjs(),
+        "day",
+        []
+      );
+    });
+  } else if (releaseDateEndFilter) {
+    displayedMovies = displayedMovies.filter((m) => {
+      return dayjs(m.release_date).isBetween(
+        dayjs("1900-01-01"),
+        dayjs(releaseDateEndFilter),
+        "day",
+        []
+      );
+    });
+  }
 
   const handleChange = (type, value) => {
     if (type === "name") {
@@ -52,6 +81,11 @@ function MovieListPageTemplate({
       setRatingStartFilter(value);
     } else if (type === "ratingEnd") {
       setRatingEndFilter(value);
+    } else if (type === "releaseDateStart") {
+      setReleaseDateStartFilter(dayjs(value));
+      console.log(releaseDateStartFilter);
+    } else if (type === "releaseDateEnd") {
+      setReleaseDateEndFilter(dayjs(value));
     }
   };
 
@@ -71,6 +105,8 @@ function MovieListPageTemplate({
             genreFilter={genreFilter}
             ratingStartFilter={ratingStartFilter}
             ratingEndFilter={ratingEndFilter}
+            releaseDateStartFilter={releaseDateStartFilter}
+            releaseDateEndFilter={releaseDateEndFilter}
           />
         </Grid>
         {viewType === "Card" ? (

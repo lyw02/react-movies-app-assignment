@@ -31,13 +31,22 @@ Name: Yiwei Liu
 + + Users can view there personal profile.
 + + Users can reset password by email.
 + + Users can log out.
++ Add new filtering option: rating and release date:
++ + Users can set rating range to filter movies.
++ + Users can set release date range, by a date picker, to to filter movies.
 
 ## Setup requirements.
 
 [ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
 
 Install firebase:
-$ npm install firebase
+`$ npm install firebase`
+
+Install day.js:
+`$ npm install dayjs`
+
+Install MUI X Date Picker:
+`$ npm install @mui/x-date-pickers`
 
 ## API endpoints.
 
@@ -75,13 +84,22 @@ Itemize the technologies/techniques you researched independently and adopted in 
 i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
 (we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).
 
-+ __Firebase__ is used to implement user authentication, inclueding sign up, log in, log out, and user profile.
++ __Firebase__ is used to implement user authentication, including sign up, log in, log out, and user profile.
 + + Source code filenames:
-+ + + firebase.js
-+ + + contexts/authContext.js
-+ + + components/firebaseAuth/login.js
-+ + + components/firebaseAuth/passwordReset.js
-+ + + components/firebaseAuth/signUpWithEmail.js
-+ + + components/firebaseAuth/userProfile.js
++ + + src/firebase.js
++ + + src/contexts/authContext.js
++ + + src/components/firebaseAuth/login.js
++ + + src/components/firebaseAuth/passwordReset.js
++ + + src/components/firebaseAuth/signUpWithEmail.js
++ + + src/components/firebaseAuth/userProfile.js
 + + References:
 + + + Tutorial: https://www.youtube.com/watch?v=PKwu15ldZ7k
+
++ __Day.js__ is a minimalist JavaScript library that deals with date. In this app, I use Day.js to help implementing new filtering option that based on movies' release date. 
++ + Source code filenames:
++ + + src/components/filterMoviesCard/index.js
++ + + src/components/templateMovieListPage/index.js
++ + References:
++ + + Doc: https://day.js.org/docs/en/installation/installation
+
++ __MUI X__ is an extension library of Material UI. In this app, I use __MUI X Date Picker__, a component for picking date, to implement new filtering option that based on movies' release date, together with Day.js.
