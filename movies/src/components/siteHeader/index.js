@@ -7,7 +7,9 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { useNavigate } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -141,6 +143,11 @@ const SiteHeader = ({ history }) => {
           ) : (
             <>{getMenu()}</>
           )}
+          <Link to={"/signup"}>
+            <Button sx={{ color: "white" }}>
+              <AccountCircleIcon />
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Offset />

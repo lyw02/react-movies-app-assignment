@@ -26,11 +26,18 @@ Name: Yiwei Liu
 + Add pagation feature (in home page, upcoming movies page and trending movies page):
 + + Users can switch among different pages by Material UI Pagination component.
 + + When users change page number by clicking the pagination component, an API request will be sent with the query param \`?page=${page}\`, and the response will be added to react-query cache.
-+ etc
++ Add Firebase authentication feature:
++ + Users can sign up and log in with emails and passwords.
++ + Users can view there personal profile.
++ + Users can reset password by email.
++ + Users can log out.
 
 ## Setup requirements.
 
 [ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
+
+Install firebase:
+$ npm install firebase
 
 ## API endpoints.
 
@@ -51,6 +58,10 @@ Name: Yiwei Liu
 
 + /actors/:id - displays an actor's details
 + /movies/trending/:timeWindow - displays daily or weekly trending movies
++ /signup - sign up page, users can sign up with email and password
++ /login - log in page, users can log in with email and password
++ /user - user profile page, displays user info.
++ /password/reset - password reset page, users can enter email and get a password reset email .
 <!-- + /blogs - displays all published blogs.
 + /blogs/:id - displays a particular blog.
 + /blogs/:id/comments - detail view of a particular blog and its comments.
@@ -63,3 +74,14 @@ Name: Yiwei Liu
 Itemize the technologies/techniques you researched independently and adopted in your project, 
 i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
 (we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).
+
++ __Firebase__ is used to implement user authentication, inclueding sign up, log in, log out, and user profile.
++ + Source code filenames:
++ + + firebase.js
++ + + contexts/authContext.js
++ + + components/firebaseAuth/login.js
++ + + components/firebaseAuth/passwordReset.js
++ + + components/firebaseAuth/signUpWithEmail.js
++ + + components/firebaseAuth/userProfile.js
++ + References:
++ + + Tutorial: https://www.youtube.com/watch?v=PKwu15ldZ7k
