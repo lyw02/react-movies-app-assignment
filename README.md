@@ -60,6 +60,7 @@ __Install Lodash__:
 `$ npm install lodash`
 
 __Config `.env` file__:
+
 Note: `.env` file should not be pushed to a remote repo, but in order to demonstrate this app, just create a `.env` file in `movies` folder and add following content:
 
     REACT_APP_TMDB_KEY=b077d449f6bc9de14639188c5e777fc4
