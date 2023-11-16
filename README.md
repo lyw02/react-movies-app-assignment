@@ -36,6 +36,9 @@ Name: Yiwei Liu
 + + Users can set release date range, by a date picker, to to filter movies.
 + Add sort feature:
 + + Users can sort movie lists by title, release date, or rating.
++ Add searching feature:
++ + Users can search movies by entering a keyword, the results will be displayed in a new page with movies that contains keyword in their titles.
++ + This feature is different with the search field in filtering movie card, which only filters movies in current page. In stead, this feature searches movies from the whole database. 
 
 ## Setup requirements.
 
@@ -62,9 +65,7 @@ Install Lodash:
 + Person (actor) images - person/:id/images
 + Similar movies - movie/:id/similar
 + Trending movies (day or week) - trending/movie/:time_window
-<!-- + Discover list of movies - discover/movie
-+ Movie details - movie/:id
-+ Movie genres = /genre/movie/list -->
++ Search for movies by title keywords - search/movie?query=keyword
 
 ## Routing.
 
@@ -75,11 +76,8 @@ Install Lodash:
 + /signup - sign up page, users can sign up with email and password
 + /login - log in page, users can log in with email and password
 + /user - user profile page, displays user info.
-+ /password/reset - password reset page, users can enter email and get a password reset email .
-<!-- + /blogs - displays all published blogs.
-+ /blogs/:id - displays a particular blog.
-+ /blogs/:id/comments - detail view of a particular blog and its comments.
-+ etc. -->
++ /password/reset - password reset page, users can enter email and get a password reset email.
++ /search/:keyword - displays search results with given keyword. 
 
 [If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
 

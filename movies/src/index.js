@@ -18,6 +18,7 @@ import Login from "./components/firebaseAuth/login";
 import UserProfile from "./components/firebaseAuth/userProfile";
 import PasswordReset from "./components/firebaseAuth/passwordReset";
 import { AuthProvider } from "./contexts/authContext";
+import SearchResultPage from "./pages/searchResultPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +55,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/user" element={<UserProfile />} />
               <Route path="/password/reset" element={<PasswordReset />} />
+              <Route path="/search/:keyword" element={<SearchResultPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

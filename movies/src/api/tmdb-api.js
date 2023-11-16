@@ -189,3 +189,18 @@ export const getTrendingMovies = (args, page) => {
       throw error;
     });
 };
+
+export const getMoviesByKeyword = (keyword, page) => {
+  return fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-U&query=${keyword}&page=${page}`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

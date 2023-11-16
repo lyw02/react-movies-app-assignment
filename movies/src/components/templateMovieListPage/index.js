@@ -7,7 +7,7 @@ import MovieEntryList from "../movieEntryList";
 import ToolBar from "../toolBar";
 import Pagination from "@mui/material/Pagination";
 import dayjs from "dayjs";
-import isBetween from "dayjs/plugin/isBetween";
+import isBetween from "dayjs/plugin/isBetween"; // eslint-disable-line no-unused-vars
 import _ from "lodash";
 
 function MovieListPageTemplate({

@@ -38,6 +38,7 @@ const TrendingMoviesPage = (props) => {
   // Redundant, but necessary to avoid app crashing.
   const mustWatch = movies.filter((m) => m.must_watch);
   localStorage.setItem("must_watch", JSON.stringify(mustWatch));
+  // eslint-disable-next-line no-unused-vars
   const addToMustWatch = (movieId) => true;
 
   return (

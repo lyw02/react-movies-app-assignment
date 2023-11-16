@@ -1,20 +1,24 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import PageTemplate from "../components/templateMovieListPage";
-import { getUpcomingMovies } from "../api/tmdb-api";
-import AddToMustWatchIcon from "../components/cardIcons/addToMustWatchIcon";
+import { getMoviesByKeyword } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
+import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 
-const UpcomingMoviesPage = (props) => {
+const SearchResultPage = (props) => {
+  const { keyword } = useParams();
+
   const [currentPage, setCurrentPage] = useState(1);
 
+  // eslint-disable-next-line no-unused-vars
   const getPage = (page) => {
     setCurrentPage(page);
   };
 
   const { data, error, isLoading, isError } = useQuery(
-    `upcoming-page${currentPage}`,
-    () => getUpcomingMovies(currentPage)
+    `search-${keyword}-page${currentPage}`,
+    () => getMoviesByKeyword(keyword, currentPage)
   );
 
   if (isLoading) {
@@ -26,6 +30,7 @@ const UpcomingMoviesPage = (props) => {
   }
 
   const movies = data.results;
+  console.log(`movies: ${JSON.stringify(movies)}`);
   const totalPage = data.total_pages;
 
   // Redundant, but necessary to avoid app crashing.
@@ -36,16 +41,16 @@ const UpcomingMoviesPage = (props) => {
 
   return (
     <PageTemplate
-      title="Upcoming Movies"
+      title={`Search result - keyword "${keyword}"`}
       movies={movies}
       page={currentPage}
       totalPage={totalPage > 500 ? 500 : totalPage} // TMDB api only allows 500 pages
       getPage={getPage}
       action={(movie) => {
-        return <AddToMustWatchIcon movie={movie} />;
+        return <AddToFavoritesIcon movie={movie} />;
       }}
     />
   );
 };
 
-export default UpcomingMoviesPage;
+export default SearchResultPage;
