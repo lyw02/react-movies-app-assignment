@@ -138,7 +138,7 @@ function MovieListPageTemplate({
           </Grid>
         )}
       </Grid>
-      <Grid container xs={12} sx={{ margin: "20px", justifyContent: "center" }}>
+      <Grid container sx={{ margin: "20px", justifyContent: "center" }}>
         <Pagination
           color="secondary"
           count={totalPage}

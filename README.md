@@ -47,6 +47,9 @@ It has :
 
 ## Setup requirements.
 
+__Install standard dependencies__:
+`$ npm install`
+
 __Install Firebase__:
 `$ npm install firebase`
 
@@ -58,6 +61,9 @@ __Install MUI X Date Picker__:
 
 __Install Lodash__:
 `$ npm install lodash`
+
+__Install UUID__:
+`$ npm install uuid`
 
 __Config `.env` file__:
 
@@ -128,6 +134,10 @@ Protected (i.e. require authentication):
     + src/components/templateMovieListPage/index.js
   + References:
     + Doc: https://lodash.com/docs/4.17.15
+
++ __UUID__ is a library for creating random unique id. In this app, I use it to genetate unique key for each list items.
+  + References:
+    + Doc: https://www.npmjs.com/package/uuid
 
 + New Material UI components used includes: Toggle Button, Avatar, Backdrop, Snackbar, Pagination, Stack.
   + References:

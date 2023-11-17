@@ -124,7 +124,7 @@ const ReviewForm = ({ movie }) => {
           name="author"
           control={control}
           rules={{ required: "Name is required" }}
-          defaultValue=""
+          // defaultValue=""
           render={({ field: { onChange, value } }) => (
             <TextField
               sx={{ width: "40ch" }}
@@ -152,7 +152,7 @@ const ReviewForm = ({ movie }) => {
             required: "Review cannot be empty.",
             minLength: { value: 10, message: "Review is too short" },
           }}
-          defaultValue=""
+          // defaultValue=""
           render={({ field: { onChange, value } }) => (
             <TextField
               variant="outlined"

@@ -104,7 +104,6 @@ export default function FilterMoviesCard(props) {
           <Select
             labelId="genre-label"
             id="genre-select"
-            defaultValue=""
             value={props.genreFilter}
             onChange={handleGenreChange}
           >
@@ -123,7 +122,6 @@ export default function FilterMoviesCard(props) {
             id="rating-start"
             label="Rating from"
             variant="filled"
-            defaultValue={0}
             value={props.ratingStartFilter}
             onChange={handleRatingStartChange}
           />
@@ -132,7 +130,6 @@ export default function FilterMoviesCard(props) {
             id="rating-start"
             label="to"
             variant="filled"
-            defaultValue={10}
             value={props.ratingEndFilter}
             onChange={handleRatingEndChange}
           />

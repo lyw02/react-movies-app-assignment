@@ -7,12 +7,14 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Box from "@mui/material/Box";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { v4 as uuidv4 } from "uuid";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
@@ -60,14 +62,14 @@ const SiteHeader = ({ history }) => {
     return menuOptions.map((opt) =>
       !opt.children ? (
         <Button
-          key={opt.label}
+          key={uuidv4()}
           color="inherit"
           onClick={() => handleMenuSelect(opt.path)}
         >
           {opt.label}
         </Button>
       ) : (
-        <>
+        <Box key={uuidv4()}>
           <Button
             key={opt.label}
             color="inherit"
@@ -87,6 +89,7 @@ const SiteHeader = ({ history }) => {
           >
             {opt.children.map((c) => (
               <MenuItem
+                key={uuidv4()}
                 onClick={() => {
                   handleMenuSelect(c.path);
                   handleCloseTrending();
@@ -96,7 +99,7 @@ const SiteHeader = ({ history }) => {
               </MenuItem>
             ))}
           </Menu>
-        </>
+        </Box>
       )
     );
   };
