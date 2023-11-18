@@ -69,9 +69,8 @@ const SiteHeader = ({ history }) => {
           {opt.label}
         </Button>
       ) : (
-        <Box key={uuidv4()}>
+        <Box key={opt.label}>
           <Button
-            key={opt.label}
             color="inherit"
             // onClick={() => handleMenuSelect(opt.path)}
             aria-controls="simple-menu"

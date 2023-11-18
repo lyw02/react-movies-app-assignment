@@ -38,7 +38,7 @@ It has :
   + Users can log out.
 + Add new filtering option: rating and release date:
   + Users can set rating range to filter movies.
-  + Users can set release date range, by a date picker, to to filter movies.
+  + Users can set release date range, by a date picker, to filter movies.
 + Add sorting feature:
   + Users can sort movie lists by title, release date, or rating.
 + Add searching feature:
@@ -47,23 +47,11 @@ It has :
 
 ## Setup requirements.
 
-__Install standard dependencies__:
+__Install dependencies__:
 `$ npm install`
 
-__Install Firebase__:
-`$ npm install firebase`
-
-__Install Day.js__:
-`$ npm install dayjs`
-
-__Install MUI X Date Picker__:
-`$ npm install @mui/x-date-pickers`
-
-__Install Lodash__:
-`$ npm install lodash`
-
-__Install UUID__:
-`$ npm install uuid`
+__Non-standard dependencies includes__:
+`$ npm install firebase dayjs @mui/x-date-pickers lodash uuid` (No need to run this)
 
 __Config `.env` file__:
 
