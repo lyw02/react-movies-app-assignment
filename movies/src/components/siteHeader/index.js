@@ -15,6 +15,7 @@ import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { v4 as uuidv4 } from "uuid";
+import { useAuth } from "../../contexts/authContext";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
@@ -28,6 +29,8 @@ const SiteHeader = ({ history }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const navigate = useNavigate();
+
+  const { currentUser } = useAuth();
 
   const menuOptions = [
     { label: "Home", path: "/" },
@@ -72,7 +75,6 @@ const SiteHeader = ({ history }) => {
         <Box key={opt.label}>
           <Button
             color="inherit"
-            // onClick={() => handleMenuSelect(opt.path)}
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleTrendingTimeWindow}
@@ -145,7 +147,7 @@ const SiteHeader = ({ history }) => {
           ) : (
             <>{getMenu()}</>
           )}
-          <Link to={"/signup"}>
+          <Link to={currentUser ? "/user" : "/signup"}>
             <Button sx={{ color: "white" }}>
               <AccountCircleIcon />
             </Button>

@@ -30,13 +30,13 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {  
+const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <SiteHeader />
         <MoviesContextProvider>
           <AuthProvider>
+            <SiteHeader />
             <Routes>
               <Route path="/reviews/form" element={<AddMovieReviewPage />} />
               <Route
