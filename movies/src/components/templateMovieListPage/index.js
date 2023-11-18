@@ -25,7 +25,7 @@ function MovieListPageTemplate({
   const [ratingStartFilter, setRatingStartFilter] = useState(0);
   const [ratingEndFilter, setRatingEndFilter] = useState(10);
   const [viewType, setViewType] = useState("Card");
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("Default");
   const genreId = Number(genreFilter);
 
   const handlePageChange = (event, value) => {

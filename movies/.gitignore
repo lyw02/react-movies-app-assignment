@@ -24,3 +24,5 @@ yarn-error.log*
 
 .env
 cypress.env.json
+
+package-lock.json
