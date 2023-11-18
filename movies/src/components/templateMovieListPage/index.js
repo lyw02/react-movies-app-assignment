@@ -78,10 +78,9 @@ function MovieListPageTemplate({
   if (sortBy === "title") {
     filteredMoviesSorted = _.orderBy(filteredMovies, "title", "asc");
   } else if (sortBy === "releaseDate") {
-    filteredMoviesSorted = _.orderBy(filteredMovies, "release_date", "dsc");
+    filteredMoviesSorted = _.orderBy(filteredMovies, "release_date", "desc");
   } else if (sortBy === "rating") {
-    filteredMoviesSorted = _.orderBy(filteredMovies, "vote_average", "dsc");
-  } else if (sortBy === "default") {
+    filteredMoviesSorted = _.orderBy(filteredMovies, "vote_average", "desc");
   }
 
   let displayedMovies;

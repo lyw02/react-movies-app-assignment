@@ -39,7 +39,7 @@ It has :
 + Add new filtering option: rating and release date:
   + Users can set rating range to filter movies.
   + Users can set release date range, by a date picker, to to filter movies.
-+ Add sort feature:
++ Add sorting feature:
   + Users can sort movie lists by title, release date, or rating.
 + Add searching feature:
   + Users can search movies by entering a keyword, the results will be displayed in a new page with movies that contains keyword in their titles.
